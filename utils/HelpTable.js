@@ -1,16 +1,12 @@
 const chalk = require("chalk");
 const Table = require("cli-table3");
-
 class HelpTable {
   constructor(moves, gameRules) {
     this.moves = moves;
     this.gameRules = gameRules;
   }
-
   generateHelpTable() {
     const n = this.moves.length;
-
-    // Create table with emphasized headers
     const table = new Table({
       head: [
         chalk.bgGreen.white.bold(" v PC\\User > "), 
@@ -21,8 +17,6 @@ class HelpTable {
         border: ['gray']
       }
     });
-
-    // Fill table with results from the user's point of view
     for (let i = 0; i < n; i++) {
       const row = [chalk.bold(this.moves[i])];
       for (let j = 0; j < n; j++) {
@@ -35,14 +29,10 @@ class HelpTable {
       }
       table.push(row);
     }
-
-    // Add explanatory text
     const explanation = 
       "Table below shows results from the user's point of view:\n" +
       "Win means the user wins, Lose means the user loses, and Draw means it's a tie.\n" +
       "Example: If the computer chooses Rock and you choose Paper, the result will be 'Win' for you.\n\n";
-
-    // Return the complete table string with explanation
     return explanation + table.toString();
   }
 }
